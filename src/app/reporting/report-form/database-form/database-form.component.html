@@ -1,0 +1,17 @@
+<div [formGroup]="databaseFormGroup">
+    <div class="label">Subset</div>
+      <div>
+        <mat-form-field appearance="fill" class="no-label-field" style="width:30%">
+          <input formControlName="subset" matInput placeholder="Add new subset" maxlength="50">
+        </mat-form-field>
+      </div>
+
+      <div class="label">Database name</div>
+      <div>
+        <mat-form-field appearance="fill" class="no-label-field" style="width:30%">
+          <input formControlName="databaseName" matInput placeholder="Write database name" maxlength="50">
+        </mat-form-field>
+      </div>
+</div>
+
+

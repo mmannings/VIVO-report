@@ -1,0 +1,15 @@
+<form [formGroup]="templateFormGroup">
+  <div class="label">Report name</div>
+    <div>
+      <mat-form-field appearance="fill" class="no-label-field" style="width:30%">
+        <input formControlName="reportName" matInput placeholder="report name" maxlength="50">
+      </mat-form-field>
+    </div>
+
+    <div class="label">Report format</div>
+    <div>
+      <mat-form-field appearance="fill" class="no-label-field" style="width:30%">
+        <input formControlName="reportFormat" matInput placeholder="report name" maxlength="50">
+      </mat-form-field>
+    </div>
+</form>
