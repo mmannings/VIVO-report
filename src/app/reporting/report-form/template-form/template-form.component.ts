@@ -14,7 +14,8 @@ export class TemplateFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.templateFormGroup = this.formBuilder.group({
-      new_template: ['Add new template']
+      reportName: '',
+      reportFormat: '',
     })
   }
 
