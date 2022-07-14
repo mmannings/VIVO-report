@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'report-database-form',
@@ -14,10 +14,10 @@ export class DatabaseFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.databaseFormGroup = this.formBuilder.group({
-      subset: '',
-      databaseName: '',
-    })
-    console.log(this.databaseFormGroup.value.subset)
+      subset: ['', Validators.required],
+      databaseName: ['', Validators.required],
+    },
+    {updateOn: "blur"})
   }
 
 }

@@ -3,6 +3,7 @@
       <div>
         <mat-form-field appearance="fill" class="no-label-field" style="width:30%">
           <input formControlName="subset" matInput placeholder="Add new subset" maxlength="50">
+          <mat-error *ngIf="databaseFormGroup.controls['subset'].invalid">Please enter a subset</mat-error>
         </mat-form-field>
       </div>
 
@@ -10,8 +11,11 @@
       <div>
         <mat-form-field appearance="fill" class="no-label-field" style="width:30%">
           <input formControlName="databaseName" matInput placeholder="Write database name" maxlength="50">
+          <mat-error *ngIf="databaseFormGroup.controls['databaseName'].invalid">Please enter a database Name</mat-error>
         </mat-form-field>
       </div>
+
+      <button mat-button matStepperNext [disabled]="databaseFormGroup.status != 'VALID'">Next</button>
 </div>
 
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'report-criteria-form',
@@ -14,8 +14,9 @@ export class CriteriaFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.criteriaFormGroup = this.formBuilder.group({
-      criteria: ''
-    })
+      criteria: ['', Validators.required],
+    },
+    {updateOn: "blur"})
   }
 
 }
