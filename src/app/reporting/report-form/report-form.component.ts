@@ -20,7 +20,7 @@ const EXPORT_INDEX: number = 3;
 export class ReportFormComponent implements OnInit, AfterViewInit {
   currentStepIndex: number = 0;
   databaseFormSubscription!: Subscription;
-
+  allFormsValid: boolean = false;
 
   @ViewChild(DatabaseFormComponent)
   databaseComponent!: DatabaseFormComponent;
@@ -79,8 +79,32 @@ export class ReportFormComponent implements OnInit, AfterViewInit {
     return (<HTMLElement>node);
   }
 
+  onStepChange(event: any) {
+    let previousIndex: number = event.previouslySelectedIndex;
+    let currentIndex: number = event.selectedIndex;
 
+    this.currentStepIndex = currentIndex;
+    console.log("Database form validness: ", this.databaseComponent.databaseFormGroup.status)
+    if (previousIndex == DATABASE_INDEX) {
+      let validForm: boolean = (this.databaseComponent.databaseFormGroup.valid);
+      if (!validForm) {
+        this.allFormsValid = false;
+      } else {
+        this.clearIconError(previousIndex);
+        this.allFormsValid = true;
+      }
+    }
+  }
 
+  private changeIcon(index: number) {
+    let iconElement: HTMLElement = this.getIconElementByIndex(index);
+    console.log('HTMLElement icon index: ', HTMLElement);
+    iconElement.classList.add('mat-step-icon-invalid');
+    console.log('HTMLElement icon index: ', HTMLElement);
+  }
 
-
+  private clearIconError(index: number) {
+    let iconElement: HTMLElement = this.getIconElementByIndex(index);
+    iconElement.classList.remove('mat-step-icon-invalid');
+  }
 }

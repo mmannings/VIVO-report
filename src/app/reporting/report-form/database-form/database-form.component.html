@@ -1,3 +1,19 @@
+<table mat-table [dataSource]="dataSource">
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <th mat-cell *matCellDef="let element">{{element.name}}</th>
+  </ng-container>
+
+  <ng-container matColumnDef="usageDetails">
+    <th mat-header-cell *matHeaderCellDef>Details</th>
+    <th mat-cell *matCellDef="let element">{{element.usageDetails}}</th>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+
 <div [formGroup]="databaseFormGroup">
     <div class="label">Subset</div>
       <div>
@@ -5,6 +21,8 @@
           <input formControlName="subset" matInput placeholder="Add new subset" maxlength="50">
           <mat-error *ngIf="databaseFormGroup.controls['subset'].invalid">Please enter a subset</mat-error>
         </mat-form-field>
+          <mat-icon>mode_edit</mat-icon>
+          <mat-icon>delete_outline</mat-icon>
       </div>
 
       <div class="label">Database name</div>
@@ -13,9 +31,11 @@
           <input formControlName="databaseName" matInput placeholder="Write database name" maxlength="50">
           <mat-error *ngIf="databaseFormGroup.controls['databaseName'].invalid">Please enter a database Name</mat-error>
         </mat-form-field>
+        <mat-icon>mode_edit</mat-icon>
+        <mat-icon>delete_outline</mat-icon>
       </div>
 
-      <button mat-button matStepperNext [disabled]="databaseFormGroup.status != 'VALID'">Next</button>
+      <button mat-button [disabled]="databaseFormGroup.status != 'VALID'" matStepperNext>Next</button>
 </div>
 
 
