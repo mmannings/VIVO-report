@@ -7,7 +7,7 @@ import { DatabaseFormComponent } from './report-form/database-form/database-form
 import { CriteriaFormComponent } from './report-form/criteria-form/criteria-form.component';
 import { TemplateFormComponent } from './report-form/template-form/template-form.component';
 import { ExportFormComponent } from './report-form/export-form/export-form.component';
-
+import { HttpClientModule } from '@angular/common/http';
 
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -22,7 +22,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
   ]
 })
 export class ReportingModule { }
