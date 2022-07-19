@@ -5,6 +5,7 @@ import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Database } from '../../models/database';
 import { first } from 'rxjs';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'report-database-form',
@@ -36,8 +37,8 @@ export class DatabaseFormComponent implements OnInit {
 
   ngOnInit(){
     localStorage.clear();
-    localStorage.setItem('database-form-key', JSON.stringify(this.data));
-    console.log(localStorage.getItem('database-form-key'));
+    localStorage.setItem(environment.datasKey, JSON.stringify(this.data));
+    console.log(localStorage.getItem(environment.datasKey));
     
     this.databaseFormGroup = this.formBuilder.group({
       name: ['', Validators.required],
@@ -52,7 +53,7 @@ export class DatabaseFormComponent implements OnInit {
       .pipe(first())
       .subscribe({
         next: () => {
-          this.data = JSON.parse(localStorage.getItem('database-form-key') || '{}');
+          this.data = JSON.parse(localStorage.getItem(environment.datasKey) || '{}');
           this.dataSource.data = this.data;
           console.log(this.data); 
           this.matTable.renderRows();

@@ -1,9 +1,9 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { delay, of, dematerialize, materialize, mergeMap, Observable, throwError } from "rxjs";
+import { environment } from "src//environments/environment"
 
-const datasKey = 'database-form-key';
-let tabs = JSON.parse(localStorage.getItem(datasKey) || "[]");
+let tabs = JSON.parse(localStorage.getItem(environment.datasKey) || "[]");
 
 @Injectable()
 export class StubBackendInterceptor implements HttpInterceptor {
@@ -33,7 +33,7 @@ export class StubBackendInterceptor implements HttpInterceptor {
                 return error('Tab "' + tab.name + '" is already exists');
             }
             tabs.push(tab);
-            localStorage.setItem(datasKey, JSON.stringify(tabs));
+            localStorage.setItem(environment.datasKey, JSON.stringify(tabs));
             return ok();
         }
 
