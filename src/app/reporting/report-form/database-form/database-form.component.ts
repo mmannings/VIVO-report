@@ -35,7 +35,7 @@ export class DatabaseFormComponent implements OnInit {
     private formBuilder: FormBuilder) { }
 
   ngOnInit(){
-
+    localStorage.clear();
     localStorage.setItem('database-form-key', JSON.stringify(this.data));
     console.log(localStorage.getItem('database-form-key'));
     
