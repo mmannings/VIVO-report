@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'report-criteria-form',
@@ -10,13 +11,19 @@ export class CriteriaFormComponent implements OnInit {
 
   criteriaFormGroup!: FormGroup;
   
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private http: HttpClient,
+              private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.criteriaFormGroup = this.formBuilder.group({
-      criteria: ['', Validators.required],
+      criteria: [''],
     },
     {updateOn: "blur"})
   }
+  
+  selected = 'edu.cornell.library.scholars.webapp.controller.api.distribute.examples.HelloDistributor';
 
+  onSubmit() {
+
+  }
 }

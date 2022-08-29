@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   datasKey: 'database-form-key',
+  apiUrl: 'http://localhost:8080/vivo112/angular',
 };
 
 /*

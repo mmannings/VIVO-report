@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DatabaseFormComponent } from './database-form.component';
+import { SubsetFormComponent } from './subset-form.component';
 
-describe('DatabaseFormComponent', () => {
-  let component: DatabaseFormComponent;
-  let fixture: ComponentFixture<DatabaseFormComponent>;
+describe('SubsetFormComponent', () => {
+  let component: SubsetFormComponent;
+  let fixture: ComponentFixture<SubsetFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DatabaseFormComponent ]
+      declarations: [ SubsetFormComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DatabaseFormComponent);
+    fixture = TestBed.createComponent(SubsetFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

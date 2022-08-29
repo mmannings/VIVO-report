@@ -1,6 +1,6 @@
-<mat-horizontal-stepper #stepper (selectionChange)="onStepChange($event)">
-        <mat-step label="Database definition">
-                <report-database-form></report-database-form>
+<div class="container">
+    <mat-horizontal-stepper #stepper (selectionChange)="onStepChange($event)">
+        <mat-step label="Subset definition">
         </mat-step>
         <mat-step label="Evaluation criteria">
             <report-criteria-form></report-criteria-form>
@@ -13,4 +13,6 @@
         <mat-step label="Export">
             <report-export-form></report-export-form>
         </mat-step>
-</mat-horizontal-stepper>
+    </mat-horizontal-stepper>
+    <router-outlet></router-outlet>
+</div>

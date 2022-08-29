@@ -1,13 +1,13 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CriteriaFormComponent } from './criteria-form/criteria-form.component';
-import { DatabaseFormComponent } from './database-form/database-form.component';
+import { SubsetFormComponent } from './subset-form/subset-form.component';
 import { ExportFormComponent } from './export-form/export-form.component';
 import { TemplateFormComponent } from './template-form/template-form.component';
 import { debounceTime, distinctUntilChanged, Subscription } from 'rxjs';
 import { FormControlName, FormGroup, FormGroupDirective } from '@angular/forms';
 
 
-const DATABASE_INDEX: number = 0;
+const SUBSET_INDEX: number = 0;
 const CRITERIA_INDEX: number = 1;
 const TEMPLATE_INDEX: number = 2;
 const EXPORT_INDEX: number = 3;
@@ -19,11 +19,11 @@ const EXPORT_INDEX: number = 3;
 })
 export class ReportFormComponent implements OnInit, AfterViewInit {
   currentStepIndex: number = 0;
-  databaseFormSubscription!: Subscription;
+  subsetFormSubscription!: Subscription;
   allFormsValid: boolean = false;
 
-  @ViewChild(DatabaseFormComponent)
-  databaseComponent!: DatabaseFormComponent;
+  @ViewChild(SubsetFormComponent)
+  subsetComponent!: SubsetFormComponent;
   @ViewChild(CriteriaFormComponent)
   criteriaComponent!: CriteriaFormComponent;
   @ViewChild(TemplateFormComponent) 
@@ -42,18 +42,7 @@ export class ReportFormComponent implements OnInit, AfterViewInit {
   }
 
   private handleSubscriptions() {
-    this.databaseFormSubscription = this.databaseComponent
-      .databaseFormGroup
-      .valueChanges
-      .pipe(
-        debounceTime(500),
-        distinctUntilChanged()
-      )
-      .subscribe(
-        (values) => {
-          this.handleFormCheck();
-        }
-      )
+    
   }
 
   private handleFormCheck() {
@@ -61,11 +50,7 @@ export class ReportFormComponent implements OnInit, AfterViewInit {
   }
 
   private handleDatabaseFormCheck() {
-    if (this.currentStepIndex == DATABASE_INDEX) {
-      if (this.databaseComponent.databaseFormGroup.valid) {
-        this.clearIncorError(DATABASE_INDEX);
-      }
-    }
+
   }
 
   private clearIncorError(index: number) {
@@ -84,16 +69,7 @@ export class ReportFormComponent implements OnInit, AfterViewInit {
     let currentIndex: number = event.selectedIndex;
 
     this.currentStepIndex = currentIndex;
-    console.log("Database form validness: ", this.databaseComponent.databaseFormGroup.status)
-    if (previousIndex == DATABASE_INDEX) {
-      let validForm: boolean = (this.databaseComponent.databaseFormGroup.valid);
-      if (!validForm) {
-        this.allFormsValid = false;
-      } else {
-        this.clearIconError(previousIndex);
-        this.allFormsValid = true;
-      }
-    }
+    
   }
 
   private changeIcon(index: number) {

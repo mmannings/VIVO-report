@@ -1,9 +1,20 @@
-<form [formGroup]="criteriaFormGroup">
-  <div class="label">Criteria</div>
-    <div>
-      <mat-form-field appearance="fill" class="no-label-field" style="width:30%">
-        <input formControlName="criteria" matInput placeholder="Add new criteria" maxlength="50">
-      </mat-form-field>
-    </div>
-</form>
+
+<form [formGroup]="criteriaFormGroup" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <mat-select [(value)]="selected">
+        <mat-option 
+          value="edu.cornell.library.scholars.webapp.controller.api.distribute.file.FileDistributor">
+          File Distributor
+        </mat-option>
+    
+        <mat-option
+          value="edu.cornell.library.scholars.webapp.controller.api.distribute.examples.HelloDistributor">
+          Hello Distributor
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    &nbsp;
+    <button mat-raised-button color="primary" type="submit">Add distributor</button>
+  </form>
+
 
