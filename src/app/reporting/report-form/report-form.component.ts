@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { CriteriaFormComponent } from './criteria-form/criteria-form.component';
-import { SubsetFormComponent } from './subset-form/subset-form.component';
-import { ExportFormComponent } from './export-form/export-form.component';
-import { TemplateFormComponent } from './template-form/template-form.component';
+import { CriteriaFormComponent } from './add-report/criteria-form/criteria-form.component';
+import { SubsetFormComponent } from './add-report/subset-form/subset-form.component';
+import { ExportFormComponent } from './add-report/export-form/export-form.component';
+import { TemplateFormComponent } from './add-report/template-form/template-form.component';
 import { debounceTime, distinctUntilChanged, Subscription } from 'rxjs';
 import { FormControlName, FormGroup, FormGroupDirective } from '@angular/forms';
 

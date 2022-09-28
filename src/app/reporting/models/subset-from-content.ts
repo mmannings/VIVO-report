@@ -1,6 +1,5 @@
 export class SubsetFromContent {
-    id!: string;
-    name!: string;
-    type!: string;
-    action!: string;
+    Name!: string;
+    Type!: string;
+    Edit!: string;
 }

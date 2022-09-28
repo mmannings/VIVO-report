@@ -1,16 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './home-component';
-import { ReportFormComponent } from './reporting/report-form/report-form.component';
+import { HomeComponent } from './reporting/home';
 
 const reportModule = () => import('./reporting/reporting.module').then(x => x.ReportingModule)
 const routes: Routes = [
   {
-    path: 'subsets',
-    component: ReportFormComponent
+    path: '', component: HomeComponent
   },
   {
-    path: 'subsets',
+    path: 'reports',
     loadChildren: reportModule
   }
 ];

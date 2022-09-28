@@ -1,18 +1,31 @@
 <div class="container">
-    <mat-horizontal-stepper #stepper (selectionChange)="onStepChange($event)">
-        <mat-step label="Subset definition">
-        </mat-step>
-        <mat-step label="Evaluation criteria">
-            <report-criteria-form></report-criteria-form>
-        </mat-step>
-        <mat-step label="Template">
-            <div>
-                <report-template-form></report-template-form>
-            </div>
-        </mat-step>
-        <mat-step label="Export">
-            <report-export-form></report-export-form>
-        </mat-step>
-    </mat-horizontal-stepper>
-    <router-outlet></router-outlet>
+  <mat-horizontal-stepper #stepper (selectionChange)="onStepChange($event)">
+    <mat-step label="Subset definition">
+      <report-subset-form></report-subset-form>
+      <div class="stepper-navigation">
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </mat-step>
+    <mat-step label="Evaluation criteria">
+      <report-criteria-form></report-criteria-form>
+      <div class="stepper-navigation">
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </mat-step>
+    <mat-step label="Template">
+        <report-template-form></report-template-form>
+        <div class="stepper-navigation">
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+    </mat-step>
+    <mat-step label="Export">
+      <report-export-form></report-export-form>
+      <div class="stepper-navigation">
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
 </div>

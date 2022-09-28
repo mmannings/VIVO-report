@@ -1,16 +1,12 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { delay, of, dematerialize, materialize, mergeMap, Observable, throwError } from "rxjs";
-import { environment } from "src/environments/environment";
+import { v4 as uuidv4 } from "uuid";
 
-const subsetsKey = 'angular-11-crud-example-users';
-const subsetsJSON = localStorage.getItem(subsetsKey);
-let subsets: any[] = subsetsJSON ? JSON.parse(subsetsJSON) : [{
-    id: 1,
-    name: 'Name for numbero eins',
-    type: 'Type for nummero 1',
-    action: 'Test'
-}];
+const reportsKey = 'report-created';
+const reportsJSON = localStorage.getItem(reportsKey);
+const UUIDV4_REGEX = /\/reports\/[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/;
+let reports: any[] = [{ }];
 
 
 @Injectable()
@@ -18,52 +14,71 @@ export class StubBackendInterceptor implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         const { url, method, headers, body } = request;
 
-        return of(null)
-            .pipe(mergeMap(handleRoute))
-            .pipe(materialize())
-            .pipe(delay(500))
-            .pipe(dematerialize())
+        return handleRoute();
 
         function handleRoute() {
             switch (true) {
-                case url.endsWith('/subsets') && method === 'GET':
+                case url.endsWith('/reports') && method === 'GET':
                     console.log("Inside get all endpoint")
-                    return getSubsets();
-                case url.endsWith('/datadistributor') && method === 'POST':
-                    console.log("Inside /add endpoint ")
-                    return createSubsets();
+                    return getReports();
+                case url.match(UUIDV4_REGEX) && method === 'GET':
+                    console.log("Inside get report by ID endpoint ")
+                    return getReportById();
+                case url.endsWith('/reports') && method === 'POST':
+                    console.log("Inside create report endpoint")
+                    return createReport();
+                case url.match(UUIDV4_REGEX) && method === 'DELETE':
+                    console.log("Inside delete report endpoint")
+                    return deleteReport();
                 default:
                     return next.handle(request);
             }
         }
 
 
-        function getSubsets() {
-            return ok(subsets.map(s => basicDetails(s)));
+        function getReports() {
+            return ok(reports.map(r => basicDetails(r)));
         }
 
-        function createSubsets() {
-            const subset = body;
+        function getReportById() {
+            var urlSplit = url.split('/')
+            var urlId = urlSplit[urlSplit.length - 1]
+            const report = reports.find(r => r.id === urlId)
+            return ok(basicDetails(report));
+        }
+
+        function createReport() {
+            localStorage.clear();
+            console.log("Local storage before adding new report: ", localStorage);
+            const report = body;
             
-            if (subsets.find(x => x.id === subset.id)) {
-                console.log(`User with such ${subset.id} is already present in local storage`);
+            if (reports.find(x => x.name === report.name)) {
+                console.log(`Report with such ${report.name} is already present in local storage`);
             }
 
-            subset.id = 2;
-            subsets.push(subset);
-            localStorage.setItem(subsetsKey, JSON.stringify(subsets));
-
+            report.id = uuidv4();
+            reports.push(report);
+            localStorage.setItem(reportsKey, JSON.stringify(reports));
+            console.log("Inside of local storage: ", localStorage.getItem(reportsKey));
             return ok();
         }
 
-        function basicDetails(subset: any) {
-            const { id, name, type, action } = subset;
-            console.log("Subset: ", subset);
-            return { id, name, type, action };
+        function deleteReport() {
+            var urlSplit = url.split('/')
+            var urlId = urlSplit[urlSplit.length - 1]
+            reports = reports.filter(r => r.id !== urlId);
+            localStorage.setItem(reportsKey, JSON.stringify(reports));
+            return ok();
+        }
+        
+        function basicDetails(report: any) {
+            const { id, name, constructQuery, selectQuery, variable } = report;
+            console.log("Report: ", report);
+            return { id, name, constructQuery, selectQuery, variable };
         }
 
         function error(message: string) {
-            return throwError({ error: { message } })
+            return throwError(() => new Error(message))
                 .pipe(materialize(), delay(500), dematerialize()); // call materialize and dematerialize to ensure delay even if an error is thrown (https://github.com/Reactive-Extensions/RxJS/issues/648);
         }
 
