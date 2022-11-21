@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { v4 as uuidv4 } from "uuid"
+import { Report } from 'src/app/reporting/models/report';
+import { ReportService } from 'src/app/reporting/services/report.service';
 
 @Component({
   selector: 'report-template-form',
@@ -8,15 +12,25 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class TemplateFormComponent implements OnInit {
 
-  templateFormGroup!: FormGroup;
-
-  constructor(private formBuilder: FormBuilder) { }
+  templateForm!: FormGroup;
+  
+  constructor(private formBuilder: FormBuilder,
+              private reportService: ReportService,
+              private router: Router,
+              private activeRoute: ActivatedRoute,) { }
 
   ngOnInit(): void {
-    this.templateFormGroup = this.formBuilder.group({
-      reportName: '',
-      reportFormat: '',
+    this.templateForm = this.formBuilder.group({
+      name: [''],
+      format: [''],
+      modelName: [''],
+      constructQuery: ['']
     })
   }
 
+  
+  initializeReport(report: Report) {
+
+    report.id = uuidv4();
+  }
 }

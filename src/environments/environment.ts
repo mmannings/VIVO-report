@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   datasKey: 'database-form-key',
-  apiUrl: 'http://localhost:4200',
+  apiUrl: 'http://localhost:8080/vitro/angular',
 };
 
 /*

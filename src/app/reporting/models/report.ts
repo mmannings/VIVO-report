@@ -5,5 +5,4 @@ export class Report {
     name!: string;
     constructQuery!: string;
     selectQuery!: string;
-    variable!: Variable;
 }

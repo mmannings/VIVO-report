@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSortModule } from '@angular/material/sort';
 
 const materialModules = [
   MatIconModule,
@@ -15,6 +16,7 @@ const materialModules = [
   MatStepperModule,
   MatTableModule,
   MatSelectModule,
+  MatSortModule,
 ];
 
 @NgModule({

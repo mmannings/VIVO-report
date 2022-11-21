@@ -1,20 +1,40 @@
-
-<form [formGroup]="criteriaFormGroup" (ngSubmit)="onSubmit()">
-    <mat-form-field>
-      <mat-select [(value)]="selected">
-        <mat-option 
-          value="edu.cornell.library.scholars.webapp.controller.api.distribute.file.FileDistributor">
-          File Distributor
-        </mat-option>
-    
-        <mat-option
-          value="edu.cornell.library.scholars.webapp.controller.api.distribute.examples.HelloDistributor">
-          Hello Distributor
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    &nbsp;
-    <button mat-raised-button color="primary" type="submit">Add distributor</button>
+<div>
+  <form [formGroup]="selectQueryForm">
+    <h3>Provide select query</h3>
+    <div class="flex">
+  
+      <div class="vertical-form">
+        <mat-form-field class="vertical-mat-form col">
+          <mat-label>Description</mat-label>
+          <input
+            formControlName="description"
+            matInput
+            placeholder="Enter description of data"
+          />
+        </mat-form-field>
+      </div>
+  
+      <div class="vertical-form">
+        <mat-form-field class="vertical-mat-form col" style="width: 700px">
+          <mat-label>Select Query</mat-label>
+          <textarea formControlName="selectQuery" matInput rows="15"  class="vertical-mat-form col-textarea"></textarea>
+          <mat-error *ngIf="selectQueryForm.controls['selectQuery'].invalid">Please enter a valid select query</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
   </form>
+  
+  <br />
+  <div>
+    <button mat-raised-button color="primary" >
+      Add new select
+    </button>
+    &nbsp;
+    <button mat-raised-button color="primary" >
+      Add new folder (group)
+    </button>
+  </div>
+  <br />
+</div>
 
 

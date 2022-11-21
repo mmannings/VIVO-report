@@ -1,46 +1,51 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatTable, MatTableDataSource } from '@angular/material/table';
-import { first } from 'rxjs';
-import { SubsetFromContent } from '../../../models/subset-from-content';
-import { ReportService } from '../../../services/report.service';
-import { formats } from '../../../constants/format';
-import { ActivatedRoute, Router } from '@angular/router';
+import { MatSort } from '@angular/material/sort';
+import { Report } from 'src/app/reporting/models/report';
+
+
 
 @Component({
   selector: 'report-subset-form',
   templateUrl: './subset-form.component.html',
   styleUrls: ['./subset-form.component.css'],
 })
-export class SubsetFormComponent implements OnInit {
-  reportForm!: FormGroup;
 
+export class SubsetFormComponent implements OnInit {
+  modelForm!: FormGroup;
+  displayedColumns: string[] = ['name', 'description','action'];
+
+  clicked: boolean = false;
   constructor(
     private formBuilder: FormBuilder,
-    private reportService: ReportService,
-    private router: Router,
-    private activeRoute: ActivatedRoute,
   ) {}
-
+  
   ngOnInit() {
-    this.reportForm = this.formBuilder.group({
-      name: ['', Validators.required, Validators.pattern('[A-Za-z \-\_]+')],
-      constructQuery: ['', Validators.required],
-      selectQuery: ['', Validators.required],
-      variable: ['', Validators.required],
+    
+    this.modelForm = this.formBuilder.group({
+      name: ['',Validators.pattern('[A-Za-z \-\_]+')],
+      description: ['',Validators.pattern('[A-Za-z \-\_]+')],
+      constructQuery: ['',],
     },
     {updateOn: "blur"});
   }
 
-  onSubmit() {
-    if (this.reportForm.invalid) {
-      return;
-    }
+  initializeReport(report: Report) {
+    let graphModel: FormGroup = this.modelForm;
 
-    this.reportService.create(this.reportForm.value)
-        .pipe(first())
-        .subscribe(() => {
-          this.router.navigate(['../'], { relativeTo: this.activeRoute});
-        })
+    report.name = graphModel.controls['name'].value;
+    report.constructQuery = graphModel.controls['constructQuery'].value;
+  }
+
+  editModel(id: number) {
+
+  }
+
+  deleteModel() {
+    this.clicked = false;
+  }
+
+  addModel() {
+    this.clicked = true;
   }
 }

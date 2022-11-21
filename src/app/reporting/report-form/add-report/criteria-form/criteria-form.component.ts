@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { Report } from 'src/app/reporting/models/report';
 
 @Component({
   selector: 'report-criteria-form',
@@ -8,22 +9,22 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./criteria-form.component.css']
 })
 export class CriteriaFormComponent implements OnInit {
-
-  criteriaFormGroup!: FormGroup;
-  
+  displayedColumns: string[] = ['name', 'description','action'];
+  selectQueryForm!: FormGroup;
   constructor(private http: HttpClient,
               private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-    this.criteriaFormGroup = this.formBuilder.group({
-      criteria: [''],
+    this.selectQueryForm = this.formBuilder.group({
+      selectQuery: [''],
+      description: ['',Validators.pattern('[A-Za-z \-\_]+')],
     },
     {updateOn: "blur"})
   }
   
-  selected = 'edu.cornell.library.scholars.webapp.controller.api.distribute.examples.HelloDistributor';
+  initializeReport(report: Report) {
+    let selectModel: FormGroup = this.selectQueryForm;
 
-  onSubmit() {
-
+    report.selectQuery = selectModel.controls['selectQuery'].value;
   }
 }

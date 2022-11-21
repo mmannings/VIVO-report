@@ -3,8 +3,11 @@ import { CriteriaFormComponent } from './add-report/criteria-form/criteria-form.
 import { SubsetFormComponent } from './add-report/subset-form/subset-form.component';
 import { ExportFormComponent } from './add-report/export-form/export-form.component';
 import { TemplateFormComponent } from './add-report/template-form/template-form.component';
-import { debounceTime, distinctUntilChanged, Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged, first, Subscription } from 'rxjs';
 import { FormControlName, FormGroup, FormGroupDirective } from '@angular/forms';
+import { Report } from '../models/report';
+import { ReportService } from '../services/report.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 const SUBSET_INDEX: number = 0;
@@ -21,6 +24,7 @@ export class ReportFormComponent implements OnInit, AfterViewInit {
   currentStepIndex: number = 0;
   subsetFormSubscription!: Subscription;
   allFormsValid: boolean = false;
+  report: Report = {} as Report;
 
   @ViewChild(SubsetFormComponent)
   subsetComponent!: SubsetFormComponent;
@@ -32,7 +36,9 @@ export class ReportFormComponent implements OnInit, AfterViewInit {
   exportComponent!: ExportFormComponent;
 
 
-  constructor() { }
+  constructor(private reportService: ReportService,
+              private router: Router,
+              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
   }
@@ -70,6 +76,29 @@ export class ReportFormComponent implements OnInit, AfterViewInit {
 
     this.currentStepIndex = currentIndex;
     
+    if (previousIndex == SUBSET_INDEX) {
+      this.subsetComponent.initializeReport(this.report);
+    }
+    else if (previousIndex == CRITERIA_INDEX) {
+      this.criteriaComponent.initializeReport(this.report);
+    }
+    else if (previousIndex == TEMPLATE_INDEX) {
+      this.templateComponent.initializeReport(this.report);
+    }
+  }
+
+  saveReport() {
+    this.reportService.create(this.report) 
+      .pipe(first())
+      .subscribe(data => {
+        let result :string[] = []
+
+        console.log("Result equals: ", result);
+        console.log("data received from RPC-post: ", JSON.stringify(data));
+        
+        console.log("Report was added. Redirecting to home");
+        this.router.navigate(['../'], { relativeTo: this.route});
+      });
   }
 
   private changeIcon(index: number) {

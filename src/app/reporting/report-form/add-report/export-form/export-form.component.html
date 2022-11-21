@@ -1,1 +1,31 @@
-<p>export-form works!</p>
+<div>
+    <form [formGroup]="modelForm">
+    <div class="flex">
+        <div class="vertical-form">
+            <mat-form-field class="vertical-mat-form col">
+              <mat-label>Selected model (construct)</mat-label>
+              <input formControlName="name" matInput placeholder="Enter model name" />
+            </mat-form-field>
+          </div>
+
+    </div>
+
+  
+      <div class="vertical-form">
+        <mat-form-field class="vertical-mat-form col">
+          <mat-label>Selected model (select)</mat-label>
+          <input formControlName="name2" matInput placeholder="Enter model name" />
+        </mat-form-field>
+      </div>
+  
+      <div class="vertical-form">
+        <mat-form-field class="vertical-mat-form col">
+          <mat-label>Selected template</mat-label>
+          <input formControlName="name3" matInput placeholder="Enter model name" />
+        </mat-form-field>
+      </div>
+  
+
+    </form>
+  </div>
+  

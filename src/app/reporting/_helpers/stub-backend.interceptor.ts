@@ -1,4 +1,4 @@
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest, HttpResponse, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { delay, of, dematerialize, materialize, mergeMap, Observable, throwError } from "rxjs";
 import { v4 as uuidv4 } from "uuid";
@@ -6,7 +6,17 @@ import { v4 as uuidv4 } from "uuid";
 const reportsKey = 'report-created';
 const reportsJSON = localStorage.getItem(reportsKey);
 const UUIDV4_REGEX = /\/reports\/[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/;
-let reports: any[] = [{ }];
+let reports: any[] = [{ 
+    id: "de27074e-5e23-4884-84e2-338e4ef19e45",
+    name: "Third party funds total",
+    constructQuery: "qwe",
+    selectQuery: "qwe"
+}, {
+    id: "de27074e-5e23-4884-84e2-338e4ef19e46",
+    name: "Publications 5 years total",
+    constructQuery: "test",
+    selectQuery: "test"
+}];
 
 
 @Injectable()
@@ -58,6 +68,7 @@ export class StubBackendInterceptor implements HttpInterceptor {
 
             report.id = uuidv4();
             reports.push(report);
+            
             localStorage.setItem(reportsKey, JSON.stringify(reports));
             console.log("Inside of local storage: ", localStorage.getItem(reportsKey));
             return ok();

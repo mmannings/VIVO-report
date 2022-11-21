@@ -1,30 +1,36 @@
 <div class="container">
   <mat-horizontal-stepper #stepper (selectionChange)="onStepChange($event)">
-    <mat-step label="Subset definition">
+    <mat-step label="Model definition">
       <report-subset-form></report-subset-form>
       <div class="stepper-navigation">
-        <button mat-button matStepperNext>Next</button>
+        <button mat-stroked-button color="primary" matStepperNext>Next</button>
       </div>
     </mat-step>
-    <mat-step label="Evaluation criteria">
+    <mat-step label="Select from model">
       <report-criteria-form></report-criteria-form>
       <div class="stepper-navigation">
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
+        <button mat-stroked-button color="primary" matStepperPrevious>Back</button>
+        <button mat-stroked-button color="primary" matStepperNext>Next</button>
       </div>
     </mat-step>
-    <mat-step label="Template">
-        <report-template-form></report-template-form>
-        <div class="stepper-navigation">
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button matStepperNext>Next</button>
-          </div>
+    <mat-step label="Reporting template">
+      <report-template-form></report-template-form>
+      <div class="stepper-navigation">
+        <button mat-stroked-button color="primary" matStepperPrevious>Back</button>
+        <button mat-stroked-button color="primary" matStepperNext>Next</button>
+      </div>
     </mat-step>
     <mat-step label="Export">
       <report-export-form></report-export-form>
       <div class="stepper-navigation">
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
+        <button
+          mat-raised-button
+          color="primary"
+          value="https://vivoweb.org/ontology/vitro-dynamic-api#dataSource"
+          (click)="saveReport()"
+        >
+          Save report
+        </button>
       </div>
     </mat-step>
   </mat-horizontal-stepper>

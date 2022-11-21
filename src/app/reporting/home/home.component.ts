@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
 import { first } from 'rxjs';
 import { Report } from '../models/report';
 import { ReportService } from '../services/report.service';
@@ -10,8 +9,9 @@ import { ReportService } from '../services/report.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'name', 'action'];
+  displayedColumns: string[] = ['name', 'action'];
   reports!: Report[]
+  selectedRowIndex = -1;
 
   constructor(private reportService: ReportService) { }
 
@@ -27,5 +27,25 @@ export class HomeComponent implements OnInit {
     this.reportService.delete(id)
         .pipe(first())
         .subscribe(() => this.reports = this.reports.filter(r => r.id !== id));
+  }
+
+  editReport(id: string) {
+    const report = this.reports.find(r => r.id === id);
+    if (!report) return;
+    this.reportService.delete(id)
+        .pipe(first())
+        .subscribe(() => this.reports = this.reports.filter(r => r.id !== id));
+  }
+
+  downloadReport(id: string) {
+    const report = this.reports.find(r => r.id === id);
+    if (!report) return;
+    this.reportService.delete(id)
+        .pipe(first())
+        .subscribe(() => this.reports = this.reports.filter(r => r.id !== id));
+  }
+
+  highlight(row: any) {
+    this.selectedRowIndex = row.id;
   }
 }

@@ -1,15 +1,36 @@
-<form [formGroup]="templateFormGroup">
-  <div class="label">Report name</div>
-    <div>
-      <mat-form-field appearance="fill" class="no-label-field" style="width:30%">
-        <input formControlName="reportName" matInput placeholder="report name" maxlength="50">
+<div>
+  <form [formGroup]="templateForm">
+    <div class="vertical-form">
+      <mat-form-field class="vertical-mat-form col">
+        <mat-label>Name</mat-label>
+        <input formControlName="name" matInput placeholder="Enter model name" />
       </mat-form-field>
     </div>
 
-    <div class="label">Report format</div>
-    <div>
-      <mat-form-field appearance="fill" class="no-label-field" style="width:30%">
-        <input formControlName="reportFormat" matInput placeholder="report name" maxlength="50">
+    <div class="vertical-form">
+      <mat-form-field class="vertical-mat-form col">
+        <mat-label>Format</mat-label>
+        <input formControlName="format" matInput placeholder="Enter model name" />
       </mat-form-field>
     </div>
-</form>
+
+    <div class="vertical-form">
+      <mat-form-field class="vertical-mat-form col">
+        <mat-label>Selected model</mat-label>
+        <input formControlName="modelName" matInput placeholder="Enter model name" />
+      </mat-form-field>
+    </div>
+
+    <div class="vertical-form">
+      <mat-form-field class="vertical-mat-form col" style="width: 700px">
+        <mat-label>Key figures, which will be transfered to a report</mat-label>
+        <textarea
+          formControlName="constructQuery"
+          matInput
+          rows="15"
+          class="vertical-mat-form col-textarea"
+        ></textarea>
+      </mat-form-field>
+    </div>
+  </form>
+</div>

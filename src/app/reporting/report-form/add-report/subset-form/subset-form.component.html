@@ -1,39 +1,39 @@
-<form [formGroup]="reportForm" (ngSubmit)="onSubmit()">
-  <div class="vertical-form col">
-    <mat-form-field class="vertical-mat-form col">
-      <mat-label>Name</mat-label>
-      <input formControlName="name" matInput placeholder="Enter template name">
-      <mat-error *ngIf="reportForm.controls['name'].invalid">Please enter a valid name</mat-error>
-    </mat-form-field>
-  </div>
+<div>
+  <div>
+    <form [formGroup]="modelForm">
+      <h3>Provide construct query along with its name and description</h3>
 
-  <div class="vertical-form col">
-    <mat-form-field class="vertical-mat-form col">
-      <mat-label>Construct query</mat-label>
-      <input formControlName="constructQuery" matInput placeholder="Enter construct query">
-      <mat-error *ngIf="reportForm.controls['constructQuery'].invalid">Please enter a valid query</mat-error>
-    </mat-form-field>
-  </div>
+      <div>
+        <div class="vertical-form">
+          <mat-form-field class="vertical-mat-form col">
+            <mat-label>Name</mat-label>
+            <input formControlName="name" matInput placeholder="Enter model name" />
+            <mat-error *ngIf="modelForm.controls['name'].invalid">Please enter a valid name</mat-error>
+          </mat-form-field>
+        </div>
 
-  <div class="vertical-form col">
-    <mat-form-field class="vertical-mat-form col">
-      <mat-label>Select query</mat-label>
-      <input formControlName="selectQuery" matInput placeholder="Enter select query">
-      <mat-error *ngIf="reportForm.controls['selectQuery'].invalid">Please enter a valid query</mat-error>
-    </mat-form-field>
-  </div>
+        <div class="vertical-form">
+          <mat-form-field class="vertical-mat-form col">
+            <mat-label>Description</mat-label>
+            <input formControlName="description" matInput placeholder="Enter description of data" />
+            <mat-error *ngIf="modelForm.controls['description'].invalid">Please enter a valid description</mat-error>
+          </mat-form-field>
+        </div>
 
-  <div class="vertical-form col">
-    <mat-form-field class="vertical-mat-form col">
-      <mat-label>Variable</mat-label>
-      <input formControlName="variable" matInput placeholder="Enter variable">
-      <mat-error *ngIf="reportForm.controls['variable'].invalid">Please enter a valid variable</mat-error>
-    </mat-form-field>
-  </div>
+        <div class="vertical-form">
+          <mat-form-field class="vertical-mat-form col" style="width: 700px">
+            <mat-label>Construct query</mat-label>
+            <textarea formControlName="constructQuery" matInput rows="15"
+              class="vertical-mat-form col-textarea"></textarea>
+            <mat-error *ngIf="modelForm.controls['constructQuery'].invalid">Please enter a valid query</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
 
-  <div class="vertical-form">
-    <button mat-button class="vertical-form btn">
-      Save
-    </button>
+      <button mat-raised-button color="primary" (click)="deleteModel()">
+        Save
+      </button>
+    </form>
   </div>
-</form>
+</div>
+<br />
