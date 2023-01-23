@@ -8,6 +8,10 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatListModule } from '@angular/material/list';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 const materialModules = [
   MatIconModule,
@@ -17,6 +21,10 @@ const materialModules = [
   MatTableModule,
   MatSelectModule,
   MatSortModule,
+  MatPaginatorModule,
+  MatListModule,
+  MatExpansionModule,
+  MatProgressBarModule
 ];
 
 @NgModule({

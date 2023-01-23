@@ -1,36 +1,4 @@
-<div>
-  <form [formGroup]="templateForm">
-    <div class="vertical-form">
-      <mat-form-field class="vertical-mat-form col">
-        <mat-label>Name</mat-label>
-        <input formControlName="name" matInput placeholder="Enter model name" />
-      </mat-form-field>
-    </div>
-
-    <div class="vertical-form">
-      <mat-form-field class="vertical-mat-form col">
-        <mat-label>Format</mat-label>
-        <input formControlName="format" matInput placeholder="Enter model name" />
-      </mat-form-field>
-    </div>
-
-    <div class="vertical-form">
-      <mat-form-field class="vertical-mat-form col">
-        <mat-label>Selected model</mat-label>
-        <input formControlName="modelName" matInput placeholder="Enter model name" />
-      </mat-form-field>
-    </div>
-
-    <div class="vertical-form">
-      <mat-form-field class="vertical-mat-form col" style="width: 700px">
-        <mat-label>Key figures, which will be transfered to a report</mat-label>
-        <textarea
-          formControlName="constructQuery"
-          matInput
-          rows="15"
-          class="vertical-mat-form col-textarea"
-        ></textarea>
-      </mat-form-field>
-    </div>
-  </form>
-</div>
+<app-material-file-uploader requiredFileType="image/png"></app-material-file-uploader>
+<br>
+<br>
+<br>

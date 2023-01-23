@@ -12,6 +12,11 @@ import { ReportService } from 'src/app/reporting/services/report.service';
 })
 export class TemplateFormComponent implements OnInit {
 
+  file_upload_config = {
+    MIME_types_accepted: "application/pdf",
+    is_multiple_selection_allowed: true,
+  }
+
   templateForm!: FormGroup;
   
   constructor(private formBuilder: FormBuilder,
@@ -33,4 +38,6 @@ export class TemplateFormComponent implements OnInit {
 
     report.id = uuidv4();
   }
+  
+
 }

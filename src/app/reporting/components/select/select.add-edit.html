@@ -1,0 +1,15 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="adder">
+        <button type="button" mat-button color="primary" (click)="addNext()">Add another</button>
+      </div>
+
+    <div formArrayName="items"
+    *ngFor="let item of controls; let i = index">
+      <div [formGroupName]="i">
+        <div class="form-i input">
+            <input>
+        </div>
+        <br/>
+      </div>
+    </div>
+</form>

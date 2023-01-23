@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReportingModule } from './reporting/reporting.module';
 import { stubBackendInterceptor } from './reporting/_helpers/stub-backend.interceptor';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { StepperDataService } from './reporting/services/stepper-data.service';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,8 @@ import { stubBackendInterceptor } from './reporting/_helpers/stub-backend.interc
     ReportingModule
   ],
   providers: [
-    stubBackendInterceptor
+    stubBackendInterceptor,
+    StepperDataService
   ],
   bootstrap: [AppComponent]
 })

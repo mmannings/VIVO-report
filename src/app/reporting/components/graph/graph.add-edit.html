@@ -1,0 +1,41 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div formArrayName="items"
+  *ngFor="let item of controls; let i = index">
+    <div [formGroupName]="i">
+        <div class="vertical-form">
+            <mat-form-field class="vertical-mat-form col">
+              <mat-label>Name</mat-label>
+              <input formControlName="name" matInput placeholder="Enter model name" />
+            </mat-form-field>
+          </div>
+      
+          <div class="vertical-form">
+            <mat-form-field class="vertical-mat-form col" style="width: 700px">
+              <mat-label>Construct query</mat-label>
+              <textarea
+                formControlName="constructQuery"
+                matInput
+                rows="15"
+                class="vertical-mat-form col-textarea"
+              ></textarea>
+            </mat-form-field>
+          </div>
+    </div>
+
+  </div>
+
+  <div class="adder">
+    <button type="button" mat-button color="primary" (click)="addNext()">Add another</button>
+  </div>
+
+  <div class="form-group">
+    <button class="btn btn-primary" mat-raised-button color="primary">
+      Save
+    </button>
+  </div>
+</form>
+<br>
+<br>
+<button class="btn btn-primary" mat-raised-button color="primary" routerLink="/graph">
+    Cancel
+</button>

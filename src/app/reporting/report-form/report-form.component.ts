@@ -8,6 +8,8 @@ import { FormControlName, FormGroup, FormGroupDirective } from '@angular/forms';
 import { Report } from '../models/report';
 import { ReportService } from '../services/report.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatStepper } from '@angular/material/stepper';
+import { StepperDataService } from '../services/stepper-data.service';
 
 
 const SUBSET_INDEX: number = 0;
@@ -25,6 +27,8 @@ export class ReportFormComponent implements OnInit, AfterViewInit {
   subsetFormSubscription!: Subscription;
   allFormsValid: boolean = false;
   report: Report = {} as Report;
+  isButtonVisible = true;
+  response!: any[];
 
   @ViewChild(SubsetFormComponent)
   subsetComponent!: SubsetFormComponent;
@@ -37,6 +41,7 @@ export class ReportFormComponent implements OnInit, AfterViewInit {
 
 
   constructor(private reportService: ReportService,
+              private stepperDataService: StepperDataService,
               private router: Router,
               private route: ActivatedRoute) { }
 
@@ -87,6 +92,12 @@ export class ReportFormComponent implements OnInit, AfterViewInit {
     }
   }
 
+  valueFromChild!: boolean;
+  hideStepperButtons(valueEmitted: any) {
+      this.isButtonVisible = valueEmitted;
+      console.log("(Parent) Value emitted: " + valueEmitted);
+  }
+
   saveReport() {
     this.reportService.create(this.report) 
       .pipe(first())
@@ -111,5 +122,22 @@ export class ReportFormComponent implements OnInit, AfterViewInit {
   private clearIconError(index: number) {
     let iconElement: HTMLElement = this.getIconElementByIndex(index);
     iconElement.classList.remove('mat-step-icon-invalid');
+  }
+
+  setIndex(event: any) {
+    this.currentStepIndex = event.selectedIndex;
+  }
+
+  triggerClick() {
+    console.log("Selected index: ", this.currentStepIndex);
+  }
+
+  onNext(stepper: MatStepper) {
+    console.log('test');
+    this.stepperDataService.getData().subscribe(data => {
+      this.response = data;
+      console.log('this.data from next(): ', this.response);
+    })
+    stepper.next();
   }
 }

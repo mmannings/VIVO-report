@@ -12,6 +12,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SubsetsRoutingModule } from './reporting-routing.module';
 import { HomeComponent } from './home';
+import { GraphComponent, SelectComponent, ReportComponent } from './components/';
+import { GraphAddEditComponent } from './components/graph/graph.add-edit';
+import { SelectAddEditComponent } from './components/select/select.add-edit';
+import { MaterialFileUploaderComponent } from '../material-file-uploader/material-file-uploader.component';
+import { LayoutComponent } from './layout/layout.component';
+import { ListGraphComponent } from './list-graph/list-graph.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +26,15 @@ import { HomeComponent } from './home';
     CriteriaFormComponent,
     TemplateFormComponent,
     ExportFormComponent,
-    HomeComponent
+    HomeComponent,
+    GraphComponent,
+    SelectComponent,
+    ReportComponent,
+    GraphAddEditComponent,
+    SelectAddEditComponent,
+    MaterialFileUploaderComponent,
+    LayoutComponent,
+    ListGraphComponent
   ],
   imports: [
     CommonModule,

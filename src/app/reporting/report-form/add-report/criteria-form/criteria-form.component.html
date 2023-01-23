@@ -1,40 +1,35 @@
-<div>
-  <form [formGroup]="selectQueryForm">
+  <form [formGroup]="selectQueryForm" (ngSubmit)="onSubmit()">
     <h3>Provide select query</h3>
     <div class="flex">
-  
+
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label>Graph</mat-label>
+          <mat-select>
+            <mat-option formControlName="name" *ngFor="let item of array" [value]="item.name">
+              {{item.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
       <div class="vertical-form">
         <mat-form-field class="vertical-mat-form col">
           <mat-label>Description</mat-label>
-          <input
-            formControlName="description"
-            matInput
-            placeholder="Enter description of data"
-          />
+          <input formControlName="description" matInput placeholder="Enter description of data" />
         </mat-form-field>
       </div>
-  
+
       <div class="vertical-form">
         <mat-form-field class="vertical-mat-form col" style="width: 700px">
           <mat-label>Select Query</mat-label>
-          <textarea formControlName="selectQuery" matInput rows="15"  class="vertical-mat-form col-textarea"></textarea>
-          <mat-error *ngIf="selectQueryForm.controls['selectQuery'].invalid">Please enter a valid select query</mat-error>
+          <textarea formControlName="selectQuery" matInput rows="15" class="vertical-mat-form col-textarea"></textarea>
+          <mat-error *ngIf="selectQueryForm.controls['selectQuery'].invalid">Please enter a valid select
+            query</mat-error>
         </mat-form-field>
       </div>
     </div>
+    <button>
+      Submit
+    </button>
   </form>
-  
-  <br />
-  <div>
-    <button mat-raised-button color="primary" >
-      Add new select
-    </button>
-    &nbsp;
-    <button mat-raised-button color="primary" >
-      Add new folder (group)
-    </button>
-  </div>
-  <br />
-</div>
-
-

@@ -2,6 +2,8 @@ import { HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest, Http
 import { Injectable } from "@angular/core";
 import { delay, of, dematerialize, materialize, mergeMap, Observable, throwError } from "rxjs";
 import { v4 as uuidv4 } from "uuid";
+import { Graph } from "../models/graph";
+import { graphArray } from "./arrays/graph-array";
 
 const reportsKey = 'report-created';
 const reportsJSON = localStorage.getItem(reportsKey);
@@ -28,6 +30,22 @@ export class StubBackendInterceptor implements HttpInterceptor {
 
         function handleRoute() {
             switch (true) {
+                case url.endsWith('/graph') && method === 'GET':
+                    console.log("Inside get all endpoint (graph)")
+                    return getGraph();
+                case url.match(UUIDV4_REGEX) && method === 'GET':
+                    console.log("Inside get report by ID endpoint (graph)")
+                    return getGraphById();
+                case url.endsWith('/graph') && method === 'POST':
+                    console.log("Inside create report endpoint (graph)")
+                    return createGraph();
+                case url.match(UUIDV4_REGEX) && method === 'PUT':
+                    console.log("Inside update endpoint (graph)")
+                    return updateGraph();
+                case url.match('/graph/' + UUIDV4_REGEX) && method === 'DELETE':
+                    console.log("Inside delete report endpoint (graph)")
+                    return deleteGraph();
+
                 case url.endsWith('/reports') && method === 'GET':
                     console.log("Inside get all endpoint")
                     return getReports();
@@ -45,16 +63,60 @@ export class StubBackendInterceptor implements HttpInterceptor {
             }
         }
 
+        function getGraph() {
+            return ok(graphArray.map(elem => populate(elem)));
+        }
+
+        function getGraphById() {
+            var urlSplit = url.split('/')
+            var urlId = urlSplit[urlSplit.length - 1]
+            const graph = graphArray.find(r => r.id === urlId)
+            return ok(populate(graph));
+        }
+
+        function createGraph() {
+            localStorage.clear();
+            console.log("Local storage before adding new report: ", localStorage);
+            const graph = body;
+            
+            if (graphArray.find(x => x.name === graph.name)) {
+                console.log(`Report with such ${graph.name} is already present in local storage`);
+            }
+
+            graph.id = uuidv4();
+            graphArray.push(graph);
+            
+            localStorage.setItem(reportsKey, JSON.stringify(graphArray));
+            console.log("Inside of local storage: ", localStorage.getItem(reportsKey));
+            return ok();
+        }
+
+        function updateGraph() {
+            let params = body;
+            let graph = graphArray.find(e => e.id === idFromUrl() )
+
+            // Object.assign(graph, params);
+            localStorage.setItem(reportsKey, JSON.stringify(graphArray));
+            return ok();
+        }
+
+        function deleteGraph() {
+            var urlSplit = url.split('/')
+            var urlId = urlSplit[urlSplit.length - 1]
+            reports = reports.filter(r => r.id !== urlId);
+            localStorage.setItem(reportsKey, JSON.stringify(reports));
+            return ok();
+        }
 
         function getReports() {
-            return ok(reports.map(r => basicDetails(r)));
+            return ok(reports.map(r => populate(r)));
         }
 
         function getReportById() {
             var urlSplit = url.split('/')
             var urlId = urlSplit[urlSplit.length - 1]
             const report = reports.find(r => r.id === urlId)
-            return ok(basicDetails(report));
+            return ok(populate(report));
         }
 
         function createReport() {
@@ -82,10 +144,10 @@ export class StubBackendInterceptor implements HttpInterceptor {
             return ok();
         }
         
-        function basicDetails(report: any) {
-            const { id, name, constructQuery, selectQuery, variable } = report;
-            console.log("Report: ", report);
-            return { id, name, constructQuery, selectQuery, variable };
+        function populate(component: any) {
+                const { id, name, constructQuery } = component;
+                console.log("Component: ", component);
+                return { id, name, constructQuery };
         }
 
         function error(message: string) {
@@ -96,6 +158,11 @@ export class StubBackendInterceptor implements HttpInterceptor {
         function ok(body?: any) {
             return of(new HttpResponse({ status: 200, body}))
                 .pipe(delay(500));
+        }
+
+        function idFromUrl() {
+            const urlParts = url.split('/');
+            return urlParts[urlParts.length - 1];
         }
     }
 }

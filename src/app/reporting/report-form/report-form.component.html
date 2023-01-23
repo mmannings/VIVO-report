@@ -1,8 +1,8 @@
 <div class="container">
-  <mat-horizontal-stepper #stepper (selectionChange)="onStepChange($event)">
+  <mat-horizontal-stepper #stepper (selectionChange)="setIndex($event)" (click)="triggerClick()" linear>
     <mat-step label="Model definition">
-      <report-subset-form></report-subset-form>
-      <div class="stepper-navigation">
+      <report-subset-form (toggleControler)="hideStepperButtons($event)"></report-subset-form>
+      <div class="stepper-navigation" *ngIf="this.isButtonVisible">
         <button mat-stroked-button color="primary" matStepperNext>Next</button>
       </div>
     </mat-step>
