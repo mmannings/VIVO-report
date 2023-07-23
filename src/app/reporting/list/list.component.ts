@@ -21,11 +21,11 @@ let selets: any[] = [
 ];
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
+  selector: 'app-list',
+  templateUrl: './list.component.html',
+  styleUrls: ['./list.component.css'],
 })
-export class HomeComponent implements OnInit, AfterViewInit {
+export class ListComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['name', 'action'];
   report!: Report[];
   selects!: Report[];
@@ -61,12 +61,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   editReport(id: string) {
-    const report = this.report.find((r) => r.id === id);
-    if (!report) return;
-    this.reportService
-      .delete(id)
-      .pipe(first())
-      .subscribe(() => (this.report = this.report.filter((r) => r.id !== id)));
+    console.log(id);
+    fetch('http://localhost:8080/vitro//api/rest/1/report_generator', {
+      method: 'GET',
+    }).then(r => console.log(r));
   }
 
   downloadReport(id: string) {

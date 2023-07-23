@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -6,34 +6,30 @@ import { Subscription } from 'rxjs';
   templateUrl: './material-file-uploader.component.html',
   styleUrls: ['./material-file-uploader.component.css']
 })
-export class MaterialFileUploaderComponent implements OnInit {
+export class MaterialFileUploaderComponent {
+  @Output() fileSelected = new EventEmitter<File>();
+  @Output() fileDropped = new EventEmitter<File>();
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-  @Input()
-  requiredFileType!: string;
-
-  fileName = '';
-  uploadProgress!: number;
-  uploadSub!: Subscription;
+  uploadedFile: File | null = null;
 
   onFileSelected(event: any) {
-    const file: File = event.target.files[0];
+    const files: FileList = event.target.files;
+    if (files && files.length > 0) {
+      const file: File = files[0];
+      this.fileSelected.emit(file);
+      this.uploadedFile = file;
+    }
+  }
 
-    if (file) {
-      this.fileName = file.name;
-      const formData = new FormData();
-      formData.append("thumbnail", file);
-
-      
+  onFileDropped(files: FileList) {
+    if (files && files.length > 0) {
+      const file: File = files[0];
+      this.fileDropped.emit(file);
+      this.uploadedFile = file;
     }
   }
 
   cancelUpload() {
-    this.uploadSub.unsubscribe();
+    this.uploadedFile = null;
   }
-
 }

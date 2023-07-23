@@ -1,31 +1,102 @@
-<div>
-    <form [formGroup]="modelForm">
-    <div class="flex">
-        <div class="vertical-form">
-            <mat-form-field class="vertical-mat-form col">
-              <mat-label>Selected model (construct)</mat-label>
-              <input formControlName="name" matInput placeholder="Enter model name" />
-            </mat-form-field>
-          </div>
-
+<mat-accordion>
+  <!-- Construct Menu -->
+  <mat-expansion-panel class="panel">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Selected model (construct)
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="panel-content">
+      <div class="expanded-content-text">Click on the row to see the query value</div>
+      <table mat-table [dataSource]="constructDataSource" class="data-table">
+        <!-- Table columns definition -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Name</th>
+          <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+        </ng-container>
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef>Description</th>
+          <td mat-cell *matCellDef="let element">{{ element.description }}</td>
+        </ng-container>
+        <!-- Table rows definition -->
+        <tr mat-header-row *matHeaderRowDef="constructColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: constructColumns" [class.expanded-row]="row.expanded" (click)="toggleQuery('construct', row)">
+        </tr>
+      </table>
+      <!-- Additional content for query -->
+      <div class="expanded-content" *ngIf="showQuery.construct">
+        <mat-form-field class="vertical-mat-form col expanded-query-field">
+          <mat-label>Query</mat-label>
+          <textarea matInput rows="4" [value]="modelForm.value.query" disabled></textarea>
+        </mat-form-field>
+      </div>
     </div>
+  </mat-expansion-panel>
 
-  
-      <div class="vertical-form">
-        <mat-form-field class="vertical-mat-form col">
-          <mat-label>Selected model (select)</mat-label>
-          <input formControlName="name2" matInput placeholder="Enter model name" />
+  <!-- Select Menu -->
+  <mat-expansion-panel class="panel">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Selected model (select)
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="panel-content">
+      <div class="expanded-content-text">Click on the row to see the query value</div>
+      <table mat-table [dataSource]="selectDataSource" class="data-table">
+        <!-- Table columns definition -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Name</th>
+          <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+        </ng-container>
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef>Description</th>
+          <td mat-cell *matCellDef="let element">{{ element.description }}</td>
+        </ng-container>
+        <!-- Table rows definition -->
+        <tr mat-header-row *matHeaderRowDef="selectColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: selectColumns" [class.expanded-row]="row.expanded" (click)="toggleQuery('select', row)">
+        </tr>
+      </table>
+      <!-- Additional content for query -->
+      <div class="expanded-content" *ngIf="showQuery.select">
+        <mat-form-field class="vertical-mat-form col expanded-query-field">
+          <mat-label>Query</mat-label>
+          <textarea matInput rows="4" [value]="'SELECT sector, SUM(emissions) AS total_emissions FROM emissions_table GROUP BY sector'" disabled></textarea>
         </mat-form-field>
       </div>
-  
-      <div class="vertical-form">
-        <mat-form-field class="vertical-mat-form col">
-          <mat-label>Selected template</mat-label>
-          <input formControlName="name3" matInput placeholder="Enter model name" />
+    </div>
+  </mat-expansion-panel>
+
+  <!-- Template Menu -->
+  <mat-expansion-panel class="panel">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Selected template
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="panel-content">
+      <div class="expanded-content-text">Click on the row to see the query value</div>
+      <table mat-table [dataSource]="templateDataSource" class="data-table">
+        <!-- Table columns definition -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Name</th>
+          <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+        </ng-container>
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef>Description</th>
+          <td mat-cell *matCellDef="let element">{{ element.description }}</td>
+        </ng-container>
+        <!-- Table rows definition -->
+        <tr mat-header-row *matHeaderRowDef="templateColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: templateColumns"></tr>
+      </table>
+      <!-- Additional content for query -->
+      <div class="expanded-content">
+        <mat-form-field class="vertical-mat-form col expanded-query-field">
+          <mat-label>Query</mat-label>
+          <textarea matInput rows="4" [value]="modelForm.value.query3" disabled></textarea>
         </mat-form-field>
       </div>
-  
-
-    </form>
-  </div>
-  
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>

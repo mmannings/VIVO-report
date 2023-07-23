@@ -1,37 +1,70 @@
-<div class="container">
-  <mat-horizontal-stepper #stepper (selectionChange)="setIndex($event)" (click)="triggerClick()" linear>
-    <mat-step label="Model definition">
-      <report-subset-form (toggleControler)="hideStepperButtons($event)"></report-subset-form>
-      <div class="stepper-navigation" *ngIf="this.isButtonVisible">
-        <button mat-stroked-button color="primary" matStepperNext>Next</button>
-      </div>
-    </mat-step>
-    <mat-step label="Select from model">
-      <report-criteria-form></report-criteria-form>
-      <div class="stepper-navigation">
-        <button mat-stroked-button color="primary" matStepperPrevious>Back</button>
-        <button mat-stroked-button color="primary" matStepperNext>Next</button>
-      </div>
-    </mat-step>
-    <mat-step label="Reporting template">
-      <report-template-form></report-template-form>
-      <div class="stepper-navigation">
-        <button mat-stroked-button color="primary" matStepperPrevious>Back</button>
-        <button mat-stroked-button color="primary" matStepperNext>Next</button>
-      </div>
-    </mat-step>
-    <mat-step label="Export">
-      <report-export-form></report-export-form>
-      <div class="stepper-navigation">
-        <button
-          mat-raised-button
-          color="primary"
-          value="https://vivoweb.org/ontology/vitro-dynamic-api#dataSource"
-          (click)="saveReport()"
-        >
-          Save report
-        </button>
-      </div>
-    </mat-step>
-  </mat-horizontal-stepper>
+<div class="grid-container">
+    <div class="menu">
+      <mat-sidenav mode="side" opened>
+        <mat-nav-list>
+          <mat-list-item>
+            <a mat-list-item routerLink="/report">
+              <mat-icon>home</mat-icon>
+              <span>Home</span>
+            </a>
+          </mat-list-item>
+          <mat-list-item>
+            <a mat-list-item routerLink="/report/list">
+              <mat-icon>dashboard</mat-icon>
+              <span>List</span>
+            </a>
+          </mat-list-item>
+          <mat-list-item>
+            <a mat-list-item routerLink="/faq">
+              <mat-icon>question_answer</mat-icon>
+              <span>FAQ</span>
+            </a>
+          </mat-list-item>
+          <!-- Add more mat-list-item elements as needed -->
+        </mat-nav-list>
+      </mat-sidenav>
+    </div>
+    <div class="content">
+      <mat-sidenav-container class="example-container">
+        <mat-sidenav-content>
+
+        <mat-horizontal-stepper #stepper (selectionChange)="setIndex($event)" (click)="triggerClick()">
+          <mat-step label="Model definition">
+            <report-subset-form (toggleControler)="hideStepperButtons($event)"></report-subset-form>
+            <div class="stepper-navigation" *ngIf="this.isButtonVisible">
+              <button mat-stroked-button color="primary" matStepperNext>Next</button>
+            </div>
+          </mat-step>
+          <mat-step label="Select from model">
+            <report-criteria-form></report-criteria-form>
+            <div class="stepper-navigation">
+              <button mat-stroked-button color="primary" matStepperPrevious>Back</button>
+              <button mat-stroked-button color="primary" matStepperNext>Next</button>
+            </div>
+          </mat-step>
+          <mat-step label="Reporting template">
+            <report-template-form></report-template-form>
+            <div class="stepper-navigation">
+              <button mat-stroked-button color="primary" matStepperPrevious>Back</button>
+              <button mat-stroked-button color="primary" matStepperNext>Next</button>
+            </div>
+          </mat-step>
+          <mat-step label="Export">
+            <report-export-form></report-export-form>
+            <div class="stepper-navigation">
+              <button
+                mat-raised-button
+                color="primary"
+                value="https://vivoweb.org/ontology/vitro-dynamic-api#dataSource"
+                (click)="saveReport()"
+              >
+                Save report
+              </button>
+            </div>
+          </mat-step>
+        </mat-horizontal-stepper>
+
+        </mat-sidenav-content>
+      </mat-sidenav-container>
+    </div>
 </div>

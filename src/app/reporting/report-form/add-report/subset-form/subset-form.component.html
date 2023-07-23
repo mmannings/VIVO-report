@@ -1,78 +1,67 @@
 <div class="graph-list" *ngIf="!toggleOn">
   <div class="graph-list mat-table">
-      <table mat-table [dataSource]="dataSource">
-  
-          <ng-container matColumnDef="name">
-              <th mat-header-cell *matHeaderCellDef>Name</th>
-              <td mat-cell *matCellDef="let element">{{element.name}}</td>
-          </ng-container>
-          
-          <ng-container matColumnDef="description">
-            <th mat-header-cell *matHeaderCellDef>Description</th>
-            <td mat-cell *matCellDef="let element">{{element.description}}</td>
-        </ng-container>
+    <table mat-table [dataSource]="dataSource">
 
-          <ng-container matColumnDef="action">
-              <tr><th mat-header-cell *matHeaderCellDef></th></tr>
-              <tr>
-                  <td mat-cell *matCellDef="let element">
-                      <button mat-icon-button color="primary" (click)="editGraph(element.name)"><mat-icon>edit</mat-icon></button>
-                      <button mat-icon-button color="primary" (click)="deleteGraph(element.name)"><mat-icon>delete</mat-icon></button>
-                  </td>
-              </tr>
-          </ng-container>
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns" 
-                      [ngClass]="{'highlight': selectedRowIndex == row.id}"
-                      (click)="highlight(row)"></tr>
-          </table>
-          <mat-paginator style="display: flex; justify-content: left;" [pageSize]="2">
-          </mat-paginator>
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let element">{{element.name}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef>Description</th>
+        <td mat-cell *matCellDef="let element">{{element.description}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button color="primary" (click)="editGraph(element.name)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" (click)="deleteGraph(element.name)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns" [ngClass]="{'highlight': selectedRowIndex == row.id}" (click)="highlight(row)"></tr>
+    </table>
   </div>
   <br>
   <button mat-raised-button color="primary" (click)="toggleInstructions($event)">New graph</button>
-
-  <button mat-raised-button color="primary" (click)="checkDatasource()">
-    Datasource data
-  </button>
 </div>
 
-<div *ngIf="toggleOn">
-
-  <form [formGroup]="modelForm" (ngSubmit)="onSubmit()">
+<div *ngIf="toggleOn" class="add-form-container">
+  <form [formGroup]="modelForm" (ngSubmit)="onSubmit()" class="add-form">
     <h3>Provide construct query along with its name and description</h3>
-  
-        <div class="vertical-form">
-          <mat-form-field class="vertical-mat-form col" >
-            <mat-label>Name</mat-label>
-            <input formControlName="name" matInput placeholder="Enter model name" />
-            <mat-error *ngIf="modelForm.controls['name'].invalid">
-              {{getErrorMessage()}}
-            </mat-error>
-          </mat-form-field>
-        </div>
-  
-        <div class="vertical-form">
-          <mat-form-field class="vertical-mat-form col">
-            <mat-label>Description</mat-label>
-            <input formControlName="description" matInput placeholder="Enter description of data" />
-          </mat-form-field>
-        </div>
-  
-        <div class="vertical-form">
-          <mat-form-field class="vertical-mat-form col" style="width: 1000px">
-            <mat-label>Construct query</mat-label>
-            <textarea formControlName="constructQuery" matInput rows="25"
-              class="vertical-mat-form col-textarea"></textarea>
-          </mat-form-field>
-        </div>
-    <div>
-  
-      <button mat-raised-button color="primary">
-        Submit
-      </button>
-    </div>
-  
-  </form>
 
+    <div class="form-group">
+      <mat-form-field class="form-field">
+        <mat-label>Name</mat-label>
+        <input formControlName="name" matInput placeholder="Enter model name" />
+        <mat-error *ngIf="modelForm.controls['name'].invalid">
+          {{ getErrorMessage() }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field class="form-field">
+        <mat-label>Description</mat-label>
+        <input formControlName="description" matInput placeholder="Enter description of data" />
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field class="form-field">
+        <mat-label>Construct query</mat-label>
+        <textarea formControlName="constructQuery" matInput rows="10" class="form-textarea"></textarea>
+      </mat-form-field>
+    </div>
+
+    <button mat-raised-button color="primary" class="submit-button">
+      Submit
+    </button>
+  </form>
 </div>

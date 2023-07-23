@@ -6,6 +6,7 @@ export const environment = {
   production: false,
   datasKey: 'database-form-key',
   apiUrl: 'http://localhost:4200',
+  vivoUrl: 'http://localhost:8080/vitro/api/',
 };
 
 /*

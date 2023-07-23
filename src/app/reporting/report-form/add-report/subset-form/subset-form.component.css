@@ -1,3 +1,77 @@
-table {
-    width: 75%;
+.graph-list {
+  margin-bottom: 20px;
+}
+
+.mat-table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.mat-table th,
+.mat-table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+
+.mat-table th {
+  background-color: #f5f5f5;
+}
+
+.highlight {
+  background-color: #f0f0f0;
+}
+
+.form-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-field {
+  width: 100%;
+}
+
+.form-textarea {
+  width: 100%;
+  resize: vertical;
+  height: 200px;
+}
+
+.submit-button {
+  margin-top: 10px;
+}
+
+.add-form {
+  width: 1200px;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-field {
+  width: 100%;
+}
+
+.form-textarea {
+  width: 100%;
+  resize: vertical;
+  height: 200px;
+  font-family: Arial, sans-serif; /* Change the font family as desired */
+  font-size: 14px; /* Change the font size as desired */
+  line-height: 1.5; /* Change the line height as desired */
+  color: #333; /* Change the text color as desired */
+}
+
+.submit-button {
+  width: 100%;
+  margin-top: 20px;
 }

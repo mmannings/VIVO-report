@@ -1,0 +1,53 @@
+table {
+    width: 100%;
+}
+
+.highlight {
+    background: #68899b;
+}
+
+.welcome-message {
+  display: flex;
+  height: 100%;
+}
+
+.example-container {
+  flex-grow: 1;
+  min-width: 50%;
+  background-color: white;
+}
+
+.content {
+  padding: 24px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: white;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.description {
+  font-size: 18px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 180px auto;
+  height: 100vh; /* Set container height to full viewport height */
+}
+
+.menu {
+  display: flex;
+  background-color: white;
+}
+
+.content {
+  padding: 0;
+  background-color: white;
+}

@@ -11,13 +11,16 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { SubsetsRoutingModule } from './reporting-routing.module';
-import { HomeComponent } from './home';
+import { HomeComponent } from './home/home.component';
+import { ListComponent } from "./list";
 import { GraphComponent, SelectComponent, ReportComponent } from './components/';
 import { GraphAddEditComponent } from './components/graph/graph.add-edit';
 import { SelectAddEditComponent } from './components/select/select.add-edit';
 import { MaterialFileUploaderComponent } from '../material-file-uploader/material-file-uploader.component';
 import { LayoutComponent } from './layout/layout.component';
 import { ListGraphComponent } from './list-graph/list-graph.component';
+import {DragAndDrop} from "../drag-and-drop/drag-and-drop";
+import { SidenavComponent } from './sidenav/sidenav.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +30,7 @@ import { ListGraphComponent } from './list-graph/list-graph.component';
     TemplateFormComponent,
     ExportFormComponent,
     HomeComponent,
+    ListComponent,
     GraphComponent,
     SelectComponent,
     ReportComponent,
@@ -34,7 +38,9 @@ import { ListGraphComponent } from './list-graph/list-graph.component';
     SelectAddEditComponent,
     MaterialFileUploaderComponent,
     LayoutComponent,
-    ListGraphComponent
+    ListGraphComponent,
+    DragAndDrop,
+    SidenavComponent
   ],
   imports: [
     CommonModule,

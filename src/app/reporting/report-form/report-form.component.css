@@ -1,4 +1,9 @@
 .mat-horizontal-stepper-header {
     pointer-events: none !important;
   }
-  
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 140px auto; /* Adjust column widths as needed */
+  height: 100vh; /* Set container height to full viewport height */
+}
